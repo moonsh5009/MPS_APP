@@ -1,0 +1,17 @@
+[package]
+name = "mps_app"
+version = "0.1.0"
+edition = "2021"
+build = "build.rs"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+cfg-if = "1"
+
+mgpu = { path = "../submodule/mgpu/mgpu" }
+mps_system = { path = "../mps_system" }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2.92"

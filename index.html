@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>MPS</title>
+    <style type="text/css">
+        :focus {
+            outline: none;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .root {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body id="mps">
+    <div class="root">
+        <canvas class="main-canvas" id="canvas"></canvas>
+    </div>
+    <script type="module">
+        import init, { run } from "./pkg/mps_app.js";
+
+        function resizeCanvas() {
+            const canvas = document.getElementById("canvas");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            console.log(canvas.width, canvas.height);
+        }
+
+        function toFullScreen()
+        {
+            const canvas = document.getElementById("canvas");
+            const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement
+
+            if(!fullscreenElement)
+            {
+                if(canvas.requestFullscreen)
+                {
+                    canvas.requestFullscreen()
+                }
+                else if(canvas.webkitRequestFullscreen)
+                {
+                    canvas.webkitRequestFullscreen()
+                }
+            }
+            else
+            {
+                if(document.exitFullscreen)
+                {
+                    document.exitFullscreen()
+                }
+                else if(document.webkitExitFullscreen)
+                {
+                    document.webkitExitFullscreen()
+                }
+            }
+        }
+
+        window.addEventListener("resize", () => resizeCanvas());
+        window.addEventListener('dblclick', () => toFullScreen());
+
+        init().then(() => {
+            resizeCanvas();
+            run();
+        }).catch(console.error);
+    </script>
+</body>
+
+</html>
