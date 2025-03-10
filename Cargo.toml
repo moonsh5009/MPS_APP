@@ -8,10 +8,11 @@ build = "build.rs"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-cfg-if = "1"
+cfg-if = { workspace = true }
+console_error_panic_hook = "0.1"
 
-mgpu = { path = "../submodule/mgpu/mgpu" }
-mps_system = { path = "../mps_system" }
+mgpu = { workspace = true }
+mps_system = { workspace = true }
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
-wasm-bindgen = "0.2.92"
+wasm-bindgen = { workspace = true }

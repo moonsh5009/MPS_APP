@@ -82,8 +82,8 @@
         window.addEventListener('dblclick', () => toFullScreen());
 
         init().then(() => {
-            resizeCanvas();
             run();
+            resizeCanvas();
         }).catch(console.error);
     </script>
 </body>
